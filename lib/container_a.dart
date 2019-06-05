@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: Text('Flutter Demo'),
+            title: Text('Flutter Container 组件'),
           ),
           body: MyBody()
       ),
