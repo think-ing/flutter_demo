@@ -44,7 +44,13 @@ flutter:
   # assets:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
-
+  assets:
+    - images/aa.jpg
+    - images/ab.jpg
+    - images/ac.jpg
+    - images/ba.jpg
+    - images/bb.jpg
+    - images/bc.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
