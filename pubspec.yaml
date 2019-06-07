@@ -51,6 +51,7 @@ flutter:
     - images/ba.jpg
     - images/bb.jpg
     - images/bc.jpg
+    - images/yuan.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
