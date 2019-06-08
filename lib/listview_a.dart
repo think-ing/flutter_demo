@@ -8,9 +8,41 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Flutter ListView组件'),),
-        // body: MyBodya(),//手动添加列表元素
-        body: MyBodyB(),//循环添加列表元素
+        body: MyBodyC(),//使用ListView.builder
+        // body: MyBodyB(),//循环添加列表元素
+        // body: MyBodyA(),//手动添加列表元素
       ),
+    );
+  }
+}
+// 使用listview.builder --------------------------------------------------------------------------------
+class MyBodyC extends StatelessWidget {
+
+  List list = new List();
+  MyBodyC(){
+    for(int i = 0; i < 20; i++){
+      list.add('我是第$i行数据');
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: this.list.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          title: Text(this.list[index]),
+        );
+      },
+    );
+  }
+}
+
+//循环添加列表元素---------------------------------------------------------------------------------------
+class MyBodyB extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: getData(),
     );
   }
 }
@@ -23,21 +55,11 @@ List<Widget> getData(){
         title: Text('循环添加列表元素$i'),
       ),
     );
+
   }
   return list;
 }
-
-//循环添加列表元素
-class MyBodyB extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: getData(),
-    );
-  }
-}
-
-//手动添加列表元素
+//手动添加列表元素 --------------------------------------------------------------------------------------
 class MyBodyA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -50,6 +72,7 @@ class MyBodyA extends StatelessWidget {
           title: Text('Flutter Image组件'),
           subtitle: Text('目录 参数详解 代码示例 效果图 完整代码 使用资源图片前必做两个步骤： 1、在根目录下创建子目录，子目录中创建2.0x和3.0x（也可以创建4.0x、5.0x... 但是2.0和3.0是必须的）目录，在对应目录中添加对应分辨率图片。（图1） 2、打开pubspec.yaml文件',maxLines: 2,overflow: TextOverflow.ellipsis,),
           leading: Image.network('https://raw.githubusercontent.com/think-ing/flutter_demo/master/images/yuan.png' ,width: 35,height: 35, ),
+          dense:true,
         ),
 
         ListTile(
