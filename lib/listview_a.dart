@@ -27,7 +27,9 @@ class MyBodyC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      //指定list长度（根据此遍历）
       itemCount: this.list.length,
+      //遍历
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           title: Text(this.list[index]),
