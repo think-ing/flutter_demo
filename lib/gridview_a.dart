@@ -16,12 +16,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 //GridView.builder  实现网格布局
 class MyBodyB extends StatelessWidget {
 
   List list = new List();
-
   MyBodyB(){
     for(int i = 1; i < 20; i++){
       int j = ( i % 9 ) + 1;
@@ -76,7 +74,6 @@ class MyBodyB extends StatelessWidget {
     );
   }
 }
-
 
 //GridView.count 实现网格布局 -----------------------------------------------------------
 class MyBodyA extends StatelessWidget {
