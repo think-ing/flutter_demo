@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 //去掉头部的appBar(其实就是将TabBar组件放在了title中)
 class MaterialAppC extends StatelessWidget {
   @override
@@ -36,7 +35,6 @@ class MaterialAppC extends StatelessWidget {
               ],
             ),
           ),
-
           body: TabBarView(
             children: <Widget>[
               TabPageA(),
@@ -49,7 +47,6 @@ class MaterialAppC extends StatelessWidget {
     );
   }
 }
-
 
 //appBar中Bottom使用方法
 class MaterialAppB extends StatefulWidget {
