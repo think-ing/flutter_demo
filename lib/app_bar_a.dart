@@ -9,9 +9,45 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return MaterialAppA();
-    return MaterialAppB();
+    // return MaterialAppB();
+    return MaterialAppC();
   }
 }
+
+
+//去掉头部的appBar(其实就是将TabBar组件放在了title中)
+class MaterialAppC extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: DefaultTabController(
+        //指定tabbar个数
+        length: 3,
+        initialIndex:0,
+        child: Scaffold(
+          appBar: AppBar(
+            title: TabBar(
+              tabs: <Widget>[
+                Tab(text: 'PageA',),
+                Tab(text: 'PageB',),
+                Tab(text: 'PageC',),
+              ],
+            ),
+          ),
+
+          body: TabBarView(
+            children: <Widget>[
+              TabPageA(),
+              TabPageB(),
+              TabPageC(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 //appBar中Bottom使用方法
 class MaterialAppB extends StatefulWidget {
