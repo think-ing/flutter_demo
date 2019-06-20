@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'appBarTabPages/TabPageA.dart';
 import 'appBarTabPages/TabPageB.dart';
 import 'appBarTabPages/TabPageC.dart';
-import 'appBarTabPages/MeituanFaxianAppBar.dart';
+import 'appBarTabPages/TabControllerPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
     // return MaterialAppA();
     // return MaterialAppB();
     // return MaterialAppC();
-    return MeituanFaxianAppBar();
+    // return MeituanFaxianAppBar();
+    return TabControllerPage();
   }
 }
 
