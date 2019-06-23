@@ -27,7 +27,16 @@ class _AnimatedTweenStaggerPageState extends State<AnimatedTweenStaggerPage> wit
   initState() {
     super.initState();
     controller = AnimationController(duration: const Duration(seconds: 6), vsync: this);
+    // 以下 写法  所有动画同时 进行
+    // opacity = Tween<double>(begin: 0.0,end: 1.0,).animate(controller);
+    // rotate = Tween<double>(begin: 0,end: Math.pi * 2,).animate(controller);
+    // movement = Tween<EdgeInsets>(begin: EdgeInsets.only(top: 0.0), end: EdgeInsets.only(top: 300.0),).animate(controller );
+    // radius = Tween<BorderRadius>(begin: BorderRadius.circular(0.0),end: BorderRadius.circular(150.0),).animate(controller);
+    // color = ColorTween(begin: Colors.blue,end: Colors.red,).animate(controller);
+    // width = Tween(begin: 0.0, end: 300.0).animate(controller );
+    // height = Tween(begin: 0.0, end: 300.0).animate(controller );
 
+    // 为动画添加延迟 写法
     opacity = Tween<double>(
       begin: 0.0,
       end: 1.0,
