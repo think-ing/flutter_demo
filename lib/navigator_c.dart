@@ -16,17 +16,16 @@ class HomeScreen extends StatelessWidget {
         title: Text('Returning Data Demo'),
       ),
       body: Center(
-          child: RaisedButton(
-            child: Text('跳转页面'),
-            onPressed: () async {
-              final result = await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PageA()),
-              );
-
-              print("$result");
-            },
-          )
+        child: RaisedButton(
+          child: Text('跳转页面'),
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PageA()),
+            );
+            print("$result");
+          },
+        )
       ),
     );
   }
