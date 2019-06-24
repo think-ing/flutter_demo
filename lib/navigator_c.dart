@@ -23,6 +23,7 @@ class HomeScreen extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => PageA()),
             );
+
             print("$result");
           },
         )
