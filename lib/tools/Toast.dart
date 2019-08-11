@@ -84,11 +84,9 @@ class Toast {
     return Toast();
   }
 
-
   void show()  {
     _overlayEntry?.remove();
     _overlayEntry = null;
-
     _startedTime = DateTime.now();
     _showing = false;
 
@@ -104,29 +102,27 @@ class Toast {
     }
   }
 
-
   //显示 文本 Toast  透明渐变
   static void _makeTextShowOpacity() async {
-
     _showing = true;
 
     //创建OverlayEntry
     _overlayEntry = OverlayEntry(
-        builder: (BuildContext context) => Positioned(
-          //top值，可以改变这个值来改变toast在屏幕中的位置
-          top: _top,
-          child: Container(
-            alignment: Alignment.center,//居中
-            width: MediaQuery.of(context).size.width,//Container 宽
-            child: AnimatedOpacity(
-              //目标透明度
-              opacity: _showing ? 1.0 : 0.0,
-              //执行时间
-              duration: _showing ? Duration(milliseconds: _millisecondsShow) : Duration(milliseconds: _millisecondsHide),
-              child: _toastWidget,
-            ),
+      builder: (BuildContext context) => Positioned(
+        //top值，可以改变这个值来改变toast在屏幕中的位置
+        top: _top,
+        child: Container(
+          alignment: Alignment.center,//居中
+          width: MediaQuery.of(context).size.width,//Container 宽
+          child: AnimatedOpacity(
+            //目标透明度
+            opacity: _showing ? 1.0 : 0.0,
+            //执行时间
+            duration: _showing ? Duration(milliseconds: _millisecondsShow) : Duration(milliseconds: _millisecondsHide),
+            child: _toastWidget,
           ),
-        )
+        ),
+      )
     );
     //显示到屏幕上
     Overlay.of(_context).insert(_overlayEntry);
@@ -147,7 +143,6 @@ class Toast {
     }
   }
 
-
   /*
   显示时 初始化在屏幕外（下边） 平移/透明 到显示位置
   隐藏时 平移/透明 到屏幕外（下边）
@@ -158,27 +153,29 @@ class Toast {
   static void _makeTextShowMovementBTB() async {
     double _x = 0;
     double _y = 1;
+    Curve mCurve = MyCurve();
 
     //创建OverlayEntry
     _overlayEntry = OverlayEntry(
-        builder: (BuildContext context) => Positioned(
-          top: _top,
-          child: Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - _top,
-            child: AnimatedOpacity(
-              opacity: _showing ? 1.0 : 0.0,
+      builder: (BuildContext context) => Positioned(
+        top: _top,
+        child: Container(
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height - _top,
+          child: AnimatedOpacity(
+            opacity: _showing ? 1.0 : 0.0,
+            duration: _showing ? Duration(milliseconds: _millisecondsShow) : Duration(milliseconds: _millisecondsHide),
+            child: AnimatedAlign(
+              // xy坐标 是决定组件再父容器中的位置。 修改坐标即可完成组件平移
+              alignment: Alignment(_x,_y),
               duration: _showing ? Duration(milliseconds: _millisecondsShow) : Duration(milliseconds: _millisecondsHide),
-              child: AnimatedAlign(
-                // xy坐标 是决定组件再父容器中的位置。 修改坐标即可完成组件平移
-                alignment: Alignment(_x,_y),
-                duration: _showing ? Duration(milliseconds: _millisecondsShow) : Duration(milliseconds: _millisecondsHide),
-                child: _toastWidget,
-              ),
+              curve: mCurve,
+              child: _toastWidget,
             ),
           ),
-        )
+        ),
+      )
     );
     //显示到屏幕上
     Overlay.of(_context).insert(_overlayEntry);
@@ -195,6 +192,7 @@ class Toast {
     //2秒后 到底消失不消失
     if (DateTime.now().difference(_startedTime).inMilliseconds >= _milliseconds) {
       _showing = false;
+      mCurve = Curves.linear;
       _x = 0;
       _y = 1;
       _overlayEntry.markNeedsBuild();
@@ -204,37 +202,38 @@ class Toast {
         _overlayEntry.remove();
         _overlayEntry = null;
       }
-
     }
   }
 
 
   //显示 文本 Toast  左中右移动
   static void _makeTextShowMovementLCR() async {
-    double _x = -3;
+    double _x = -3.5;
     double _y = -1;
+    Curve mCurve = MyCurve();
 
     //创建OverlayEntry
     _overlayEntry = OverlayEntry(
-        builder: (BuildContext context) => Positioned(
-          top: _top,
-          child: Container(
-            // color:Colors.yellow,
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width ,
-            height: MediaQuery.of(context).size.height - _top + 50,
-            child: AnimatedOpacity(
-              opacity: _showing ? 1.0 : 0.0,
+      builder: (BuildContext context) => Positioned(
+        top: _top,
+        child: Container(
+          // color:Colors.yellow,
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width ,
+          height: MediaQuery.of(context).size.height - _top + 50,
+          child: AnimatedOpacity(
+            opacity: _showing ? 1.0 : 0.0,
+            duration: _showing ? Duration(milliseconds: _millisecondsShow) : Duration(milliseconds: _millisecondsHide),
+            child: AnimatedAlign(
+              // xy坐标 是决定组件再父容器中的位置。 修改坐标即可完成组件平移
+              alignment: Alignment(_x,_y),
               duration: _showing ? Duration(milliseconds: _millisecondsShow) : Duration(milliseconds: _millisecondsHide),
-              child: AnimatedAlign(
-                // xy坐标 是决定组件再父容器中的位置。 修改坐标即可完成组件平移
-                alignment: Alignment(_x,_y),
-                duration: _showing ? Duration(milliseconds: _millisecondsShow) : Duration(milliseconds: _millisecondsHide),
-                child: _toastWidget,
-              ),
+              curve: mCurve,
+              child: _toastWidget,
             ),
           ),
-        )
+        ),
+      )
     );
     //显示到屏幕上
     Overlay.of(_context).insert(_overlayEntry);
@@ -251,7 +250,8 @@ class Toast {
     //2秒后 到底消失不消失
     if (DateTime.now().difference(_startedTime).inMilliseconds >= _milliseconds) {
       _showing = false;
-      _x = 3;
+      mCurve = Curves.linear;
+      _x = 3.5;
       _y = -1;
       _overlayEntry.markNeedsBuild();
       //等待动画执行
@@ -264,7 +264,7 @@ class Toast {
   }
 
 
-//显示 文本 Toast  Tween 动画
+  //显示 文本 Toast  Tween 动画
   static void _makeTextShowTween() async {
     _overlayEntry?.remove();
     _overlayEntry = null;
@@ -287,42 +287,42 @@ class Toast {
     Animation<double> opacityHide = new Tween(begin: 1.0, end: 0.0).animate(hideAnimationController);
 
     _overlayEntry = OverlayEntry(
-        builder: (BuildContext context){
-          return Positioned(
-            //top值，可以改变这个值来改变toast在屏幕中的位置
-            top: _top,
-            child: Container(
-              alignment: Alignment.center,//居中
-              width: MediaQuery.of(context).size.width,//Container 宽
-              child: AnimatedBuilder(
-                animation: opacityShow,
-                child: _toastWidget,
-                builder: (context, childToBuild) {
-                  return Opacity(
-                    opacity: opacityShow.value,
-                    child: AnimatedBuilder(
-                      animation: offsetAnim,
-                      builder: (context, _) {
-                        return Transform.translate(
-                          offset: Offset(0, offsetAnim.value),
-                          child: AnimatedBuilder(
-                            animation: opacityHide,
-                            builder: (context, _) {
-                              return Opacity(
-                                opacity: opacityHide.value,
-                                child: childToBuild,
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
+      builder: (BuildContext context){
+        return Positioned(
+          //top值，可以改变这个值来改变toast在屏幕中的位置
+          top: _top,
+          child: Container(
+            alignment: Alignment.center,//居中
+            width: MediaQuery.of(context).size.width,//Container 宽
+            child: AnimatedBuilder(
+              animation: opacityShow,
+              child: _toastWidget,
+              builder: (context, childToBuild) {
+                return Opacity(
+                  opacity: opacityShow.value,
+                  child: AnimatedBuilder(
+                    animation: offsetAnim,
+                    builder: (context, _) {
+                      return Transform.translate(
+                        offset: Offset(0, offsetAnim.value),
+                        child: AnimatedBuilder(
+                          animation: opacityHide,
+                          builder: (context, _) {
+                            return Opacity(
+                              opacity: opacityHide.value,
+                              child: childToBuild,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
             ),
-          );
-        }
+          ),
+        );
+      }
     );
     //显示到屏幕上
     overlayState.insert(_overlayEntry);
@@ -340,10 +340,8 @@ class Toast {
       await Future.delayed(Duration(milliseconds: 250));
       _overlayEntry?.remove();
       _overlayEntry = null;
-
     }
   }
-
 
   //toast绘制
   static _defaultToastLayout() {
