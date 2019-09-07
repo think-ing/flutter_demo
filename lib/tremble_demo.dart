@@ -81,7 +81,6 @@ class _TrembleDemoState extends State<TrembleDemo> with SingleTickerProviderStat
 
 //自定义 一个曲线  当然 也可以使用SDK提供的 如： Curves.fastOutSlowIn    抖动
 class MyCurve extends Curve{
-
   const MyCurve([this.period = 1]);//抖动频率
   final double period;
 
